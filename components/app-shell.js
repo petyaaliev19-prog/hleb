@@ -11,7 +11,7 @@ export function AppShell({ activeNav, children }) {
     <div className="app-shell">
       <header className="app-topbar">
         <div>
-          <p className="eyebrow">MVP сервиса предзаказа</p>
+          <p className="eyebrow">Сервис предзаказа</p>
           <h1>Хлебушек</h1>
         </div>
         <nav className="topnav" aria-label="Основная навигация">
