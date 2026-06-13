@@ -18,7 +18,7 @@ export default async function HomePage() {
   return (
     <AppShell activeNav="showcase">
       <HeroSection initialMetrics={metrics} />
-      <StorefrontWorkspace />
+      <StorefrontWorkspace initialBakeries={bakeries} />
       <OrdersFeed initialDate={metrics.primaryDate} initialOrders={initialOrders} />
       <DashboardPanel
         initialDate={metrics.primaryDate}

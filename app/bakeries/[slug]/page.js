@@ -4,7 +4,8 @@ import { SingleBakeryPage } from "@/components/single-bakery-page";
 import { dbRepository } from "@/lib/db-repository";
 
 export default async function BakeryPage({ params }) {
-  const bakery = await dbRepository.getBakeryBySlug(params.slug);
+  const { slug } = await params;
+  const bakery = await dbRepository.getBakeryBySlug(slug);
 
   if (!bakery) {
     notFound();
@@ -12,7 +13,7 @@ export default async function BakeryPage({ params }) {
 
   return (
     <AppShell activeNav="showcase">
-      <SingleBakeryPage slug={params.slug} initialBakery={bakery} />
+      <SingleBakeryPage slug={slug} initialBakery={bakery} />
     </AppShell>
   );
 }

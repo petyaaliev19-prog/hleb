@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import assert from "node:assert/strict";
+import { DatabaseSync } from "node:sqlite";
 import { createDbRepository } from "../lib/db-repository.js";
 
 function createTempDbPath() {
@@ -56,6 +57,63 @@ test("db repository rejects overbooking", () => {
       }),
     /Requested quantity exceeds availability/,
   );
+});
+
+test("db repository rejects duplicate product lines in one order", () => {
+  const repository = createDbRepository(createTempDbPath());
+
+  assert.throws(
+    () =>
+      repository.createOrder({
+        bakeryId: "bakery-1",
+        pickupDate: "2026-06-14",
+        pickupSlotId: "slot-1",
+        customerName: "Покупатель",
+        customerPhone: "+79990000000",
+        items: [
+          { productId: "prod-1", qty: 1 },
+          { productId: "prod-1", qty: 1 },
+        ],
+      }),
+    /Duplicate order items are not allowed/,
+  );
+});
+
+test("db repository builds next order id from highest numeric id", () => {
+  const dbPath = createTempDbPath();
+  const repository = createDbRepository(dbPath);
+  const db = new DatabaseSync(dbPath);
+
+  db.prepare(`
+    INSERT INTO orders (
+      id, bakery_id, bakery_name, customer_name, customer_phone, pickup_date,
+      pickup_slot_id, pickup_slot_label, status, comment
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    "ORD-9999",
+    "bakery-1",
+    "Мука",
+    "Тест",
+    "+79990000000",
+    "2026-06-14",
+    "slot-1",
+    "08:00-10:00",
+    "new",
+    "",
+  );
+  db.close();
+
+  const result = repository.createOrder({
+    bakeryId: "bakery-1",
+    pickupDate: "2026-06-14",
+    pickupSlotId: "slot-1",
+    customerName: "Покупатель",
+    customerPhone: "+79990000001",
+    items: [{ productId: "prod-1", qty: 1 }],
+  });
+
+  assert.equal(result.order.id, "ORD-10000");
 });
 
 test("db repository updates order status through allowed transitions", () => {

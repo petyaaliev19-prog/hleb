@@ -2,25 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { getBakeryDates, getBakeries } from "@/data/mock-data";
+import { getBakeryDates } from "@/lib/bakery-utils";
 import { createOrder, fetchBakeries } from "@/lib/api";
 import { formatDate, formatPrice } from "@/lib/format";
 import { buildCartItems, calculateCartTotals, normalizeCartQty } from "@/lib/order-utils";
 
-export function StorefrontWorkspace() {
-  const initialBakeries = getBakeries();
+export function StorefrontWorkspace({ initialBakeries }) {
   const [bakeries, setBakeries] = useState(initialBakeries);
   const [query, setQuery] = useState("");
   const [selectedBakeryId, setSelectedBakeryId] = useState(initialBakeries[0]?.id ?? "");
-  const [selectedDate, setSelectedDate] = useState(getBakeryDates(initialBakeries[0])[0]);
+  const [selectedDate, setSelectedDate] = useState(getBakeryDates(initialBakeries[0])[0] ?? "");
   const [selectedSlotId, setSelectedSlotId] = useState(initialBakeries[0]?.slots[0]?.id ?? "");
   const [cart, setCart] = useState({});
   const [confirmation, setConfirmation] = useState(null);
 
-  const selectedBakery = bakeries.find((bakery) => bakery.id === selectedBakeryId) ?? bakeries[0];
+  const selectedBakery = bakeries.find((bakery) => bakery.id === selectedBakeryId) ?? bakeries[0] ?? null;
   const dates = useMemo(() => getBakeryDates(selectedBakery), [selectedBakery]);
   const slots = useMemo(
-    () => selectedBakery.slots.filter((slot) => slot.date === selectedDate),
+    () => selectedBakery?.slots.filter((slot) => slot.date === selectedDate) ?? [],
     [selectedBakery, selectedDate],
   );
 
@@ -35,7 +34,7 @@ export function StorefrontWorkspace() {
     );
   }, [bakeries, query]);
 
-  const cartItems = buildCartItems(selectedBakery.products, cart);
+  const cartItems = buildCartItems(selectedBakery?.products ?? [], cart);
   const { totalPrice: total, totalItems } = calculateCartTotals(cartItems);
 
   useEffect(() => {
@@ -78,7 +77,7 @@ export function StorefrontWorkspace() {
 
   function handleDateChange(nextDate) {
     setSelectedDate(nextDate);
-    setSelectedSlotId(selectedBakery.slots.find((slot) => slot.date === nextDate)?.id ?? "");
+    setSelectedSlotId(selectedBakery?.slots.find((slot) => slot.date === nextDate)?.id ?? "");
     setCart({});
     setConfirmation(null);
   }
@@ -104,7 +103,7 @@ export function StorefrontWorkspace() {
     const comment = String(formData.get("comment") ?? "").trim();
     const slot = slots.find((item) => item.id === selectedSlotId);
 
-    if (!name || !phone || !slot || !cartItems.length) {
+    if (!selectedBakery || !name || !phone || !slot || !cartItems.length) {
       setConfirmation({
         tone: "error",
         title: "Нужно заполнить заказ",
@@ -197,15 +196,15 @@ export function StorefrontWorkspace() {
         <div className="panel-header">
           <div>
             <p className="eyebrow">Витрина пекарни</p>
-            <h3>{selectedBakery.name}</h3>
-            <p className="storefront-lead">{selectedBakery.lead}</p>
+            <h3>{selectedBakery?.name ?? "Пекарня"}</h3>
+            <p className="storefront-lead">{selectedBakery?.lead ?? "Выбери пекарню из каталога."}</p>
             <div className="bakery-meta">
-              <span>{selectedBakery.address}</span>
-              <span>{selectedBakery.hours}</span>
-              <span>{selectedBakery.phone}</span>
+              <span>{selectedBakery?.address ?? "Адрес появится после выбора"}</span>
+              <span>{selectedBakery?.hours ?? "Часы работы появятся после выбора"}</span>
+              <span>{selectedBakery?.phone ?? "Телефон появится после выбора"}</span>
             </div>
           </div>
-          <span className="bakery-badge">{selectedBakery.badge}</span>
+          <span className="bakery-badge">{selectedBakery?.badge ?? "Самовывоз"}</span>
         </div>
 
         <div className="selectors">
@@ -232,7 +231,7 @@ export function StorefrontWorkspace() {
         </div>
 
         <div className="product-grid">
-          {selectedBakery.products.map((product) => {
+          {(selectedBakery?.products ?? []).map((product) => {
             const availableQty = product.availability[selectedDate] ?? 0;
             const qty = cart[product.id] ?? 0;
 

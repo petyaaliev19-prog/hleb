@@ -3,8 +3,9 @@ import { dbRepository } from "@/lib/db-repository";
 
 export async function PATCH(request, { params }) {
   try {
+    const { id } = await params;
     const payload = await request.json();
-    const result = await dbRepository.updateOrderStatus(params.id, payload.status);
+    const result = await dbRepository.updateOrderStatus(id, payload.status);
     return NextResponse.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to update order status";

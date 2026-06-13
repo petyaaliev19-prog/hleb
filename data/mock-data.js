@@ -1,4 +1,5 @@
 import { seedBakeries, seedOrders } from "./seed-data.js";
+import { getBakeryDates } from "../lib/bakery-utils.js";
 
 export function getBakeries() {
   return seedBakeries;
@@ -10,10 +11,6 @@ export function getBakeryById(id) {
 
 export function getBakeryBySlug(slug) {
   return seedBakeries.find((bakery) => bakery.slug === slug);
-}
-
-export function getBakeryDates(bakery) {
-  return [...new Set(bakery.slots.map((slot) => slot.date))].sort();
 }
 
 export function getOrdersByDate(date) {

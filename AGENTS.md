@@ -13,7 +13,11 @@ Before making substantial changes, read:
 2. `TASKS.md`
 3. `DOCUMENTATION_RULES.md`
 
-If the task touches architecture, data, or API contracts, create or update the owning document described in `DOCUMENTATION_RULES.md`.
+If the task touches architecture, data, or API contracts, also read and update the relevant owner:
+
+1. `ARCHITECTURE.md`
+2. `DATA_MODEL.md`
+3. `API_CONTRACTS.md`
 
 ## Project Focus
 

@@ -43,6 +43,26 @@ test("mock store rejects orders with invalid availability", () => {
   );
 });
 
+test("mock store rejects duplicate product lines in one order", () => {
+  const store = createMockStore();
+
+  assert.throws(
+    () =>
+      store.createOrder({
+        bakeryId: "bakery-1",
+        pickupDate: "2026-06-14",
+        pickupSlotId: "slot-1",
+        customerName: "Покупатель",
+        customerPhone: "+79990000000",
+        items: [
+          { productId: "prod-1", qty: 1 },
+          { productId: "prod-1", qty: 1 },
+        ],
+      }),
+    /Duplicate order items are not allowed/,
+  );
+});
+
 test("mock store rejects invalid pickup slot for selected bakery and date", () => {
   const store = createMockStore();
 
