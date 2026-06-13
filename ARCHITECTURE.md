@@ -30,6 +30,7 @@ Do not make client components import seed data for active state. Pass server-loa
 - `features/bakeries/`: bakery storefront components and bakery domain helpers.
 - `features/orders/`: order feed components, order status rules, and cart/order summary helpers.
 - `features/dashboard/`: bakery dashboard page view and dashboard panel.
+- `features/owner/`: bakery owner cabinet pages and card management views.
 - `lib/api.js`: browser-side API client helpers.
 - `lib/format.js`: shared formatting helpers.
 - `lib/mock-store.js`: legacy/test support around seed data, not active app state.
@@ -41,6 +42,26 @@ Do not make client components import seed data for active state. Pass server-loa
 ## Legacy Prototype
 
 The files under `legacy/standalone-prototype/` are the old standalone prototype. They are not the active application runtime. New product work should happen in `app/`, `components/`, `lib/`, and `data/`.
+
+## Interface Boundaries
+
+Customer-facing routes:
+
+1. `/`
+2. `/bakeries/[slug]`
+
+Owner-facing routes:
+
+1. `/owner`
+2. `/owner/bakeries/[slug]`
+3. `/owner/orders`
+
+Legacy public operational routes redirect into the owner area:
+
+1. `/dashboard` -> `/owner`
+2. `/orders` -> `/owner/orders`
+
+Do not expose order feeds, production summaries, or status controls in customer-facing routes.
 
 ## Next.js Dynamic Params
 

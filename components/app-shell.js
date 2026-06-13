@@ -1,17 +1,24 @@
 import Link from "next/link";
 
-const navItems = [
-  { href: "/", label: "Витрина", key: "showcase" },
-  { href: "/orders", label: "Заказы", key: "orders" },
-  { href: "/dashboard", label: "Панель пекарни", key: "dashboard" },
-];
+const navItemsByAudience = {
+  customer: [
+    { href: "/", label: "Пекарни", key: "bakeries" },
+    { href: "/owner", label: "Для пекарен", key: "owner" },
+  ],
+  owner: [
+    { href: "/owner", label: "Мои пекарни", key: "owner" },
+    { href: "/owner/orders", label: "Заказы", key: "orders" },
+  ],
+};
 
-export function AppShell({ activeNav, children }) {
+export function AppShell({ activeNav, audience = "customer", children }) {
+  const navItems = navItemsByAudience[audience] ?? navItemsByAudience.customer;
+
   return (
     <div className="app-shell">
       <header className="app-topbar">
         <div>
-          <p className="eyebrow">Сервис предзаказа</p>
+          <p className="eyebrow">{audience === "owner" ? "Кабинет пекарни" : "Сервис предзаказа"}</p>
           <h1>Хлебушек</h1>
         </div>
         <nav className="topnav" aria-label="Основная навигация">

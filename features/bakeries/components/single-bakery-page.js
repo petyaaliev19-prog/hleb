@@ -254,7 +254,7 @@ export function SingleBakeryPage({ slug, initialBakery }) {
             <div className="confirmation-card">
               <p className="eyebrow">Как работает заказ</p>
               <p className="storefront-lead">
-                Эта страница уже работает через тот же mock API слой, что и главная витрина.
+                Эта страница работает через API предзаказа и обновляет доступность товаров.
                 Заказы создаются с оплатой на месте и сразу отражаются в панели пекарни.
               </p>
             </div>

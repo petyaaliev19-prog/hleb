@@ -12,7 +12,7 @@ export default async function BakeryPage({ params }) {
   }
 
   return (
-    <AppShell activeNav="showcase">
+    <AppShell activeNav="bakeries">
       <SingleBakeryPage slug={slug} initialBakery={bakery} />
     </AppShell>
   );

@@ -11,9 +11,10 @@ export function DashboardPanel({
   initialBakeries,
   initialAvailableDates,
   initialOrders,
+  initialBakeryId,
 }) {
   const [selectedDate, setSelectedDate] = useState(initialDate);
-  const [selectedBakeryId, setSelectedBakeryId] = useState(initialBakeries[0]?.id ?? "");
+  const [selectedBakeryId, setSelectedBakeryId] = useState(initialBakeryId ?? initialBakeries[0]?.id ?? "");
   const [orders, setOrders] = useState(initialOrders);
   const [pendingOrderId, setPendingOrderId] = useState("");
 

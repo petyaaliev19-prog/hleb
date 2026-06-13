@@ -29,6 +29,7 @@ Current focus:
 2. Bakery storefront with assortment and pickup slots.
 3. Pre-order without online payment.
 4. Bakery dashboard for orders, statuses, and production planning.
+5. Separate customer-facing and bakery-owner interfaces.
 
 Do not add without an explicit product decision:
 
@@ -54,6 +55,12 @@ Do not add without an explicit product decision:
 2. Put server-only persistence code in `server/`.
 3. Keep `components/` for app-wide presentation components only.
 4. Keep `lib/` for cross-domain browser API and formatting helpers.
+
+## Interface Boundaries
+
+1. Customer routes show only bakery cards, storefronts, products, pickup slots, and checkout.
+2. Owner routes live under `/owner` and contain bakery card management, order feeds, production summaries, and status controls.
+3. Do not add operational bakery controls to customer-facing routes.
 
 ## Git
 
