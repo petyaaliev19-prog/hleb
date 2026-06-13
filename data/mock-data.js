@@ -1,5 +1,5 @@
 import { seedBakeries, seedOrders } from "./seed-data.js";
-import { getBakeryDates } from "../lib/bakery-utils.js";
+import { getBakeryDates } from "../features/bakeries/bakery-utils.js";
 
 export function getBakeries() {
   return seedBakeries;

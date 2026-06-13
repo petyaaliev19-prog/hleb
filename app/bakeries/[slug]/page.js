@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
-import { SingleBakeryPage } from "@/components/single-bakery-page";
-import { dbRepository } from "@/lib/db-repository";
+import { SingleBakeryPage } from "@/features/bakeries/components/single-bakery-page";
+import { dbRepository } from "@/server/db/db-repository";
 
 export default async function BakeryPage({ params }) {
   const { slug } = await params;

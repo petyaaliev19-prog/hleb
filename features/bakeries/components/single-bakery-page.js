@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { createOrder, fetchBakeryBySlug } from "@/lib/api";
 import { formatDate, formatPrice } from "@/lib/format";
-import { getBakeryDates } from "@/lib/bakery-utils";
-import { buildCartItems, calculateCartTotals, normalizeCartQty } from "@/lib/order-utils";
+import { getBakeryDates } from "@/features/bakeries/bakery-utils";
+import { buildCartItems, calculateCartTotals, normalizeCartQty } from "@/features/orders/order-utils";
 
 export function SingleBakeryPage({ slug, initialBakery }) {
   const [bakery, setBakery] = useState(initialBakery);

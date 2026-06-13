@@ -4,7 +4,7 @@ import path from "node:path";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
-import { createDbRepository } from "../lib/db-repository.js";
+import { createDbRepository } from "../server/db/db-repository.js";
 
 function createTempDbPath() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "hlebushek-db-"));

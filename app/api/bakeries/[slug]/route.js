@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbRepository } from "@/lib/db-repository";
+import { dbRepository } from "@/server/db/db-repository";
 
 export async function GET(_request, { params }) {
   const { slug } = await params;

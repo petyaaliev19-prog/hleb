@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { getBakeryDates } from "@/lib/bakery-utils";
+import { getBakeryDates } from "@/features/bakeries/bakery-utils";
 import { createOrder, fetchBakeries } from "@/lib/api";
 import { formatDate, formatPrice } from "@/lib/format";
-import { buildCartItems, calculateCartTotals, normalizeCartQty } from "@/lib/order-utils";
+import { buildCartItems, calculateCartTotals, normalizeCartQty } from "@/features/orders/order-utils";
 
 export function StorefrontWorkspace({ initialBakeries }) {
   const [bakeries, setBakeries] = useState(initialBakeries);

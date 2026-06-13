@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getBakeryDates } from "../lib/bakery-utils.js";
+import { getBakeryDates } from "../features/bakeries/bakery-utils.js";
 
 test("getBakeryDates returns sorted unique dates and handles missing bakery", () => {
   assert.deepEqual(getBakeryDates(null), []);

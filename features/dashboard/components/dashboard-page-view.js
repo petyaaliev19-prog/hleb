@@ -1,4 +1,4 @@
-import { DashboardPanel } from "@/components/dashboard-panel";
+import { DashboardPanel } from "@/features/dashboard/components/dashboard-panel";
 
 export function DashboardPageView({ initialDate, initialBakeries, initialAvailableDates, initialOrders }) {
   return (

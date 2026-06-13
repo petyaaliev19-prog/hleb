@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { canTransitionOrderStatus, isKnownOrderStatus } from "./order-status.js";
-import { seedBakeries, seedOrders } from "../data/seed-data.js";
+import { canTransitionOrderStatus, isKnownOrderStatus } from "../../features/orders/order-status.js";
+import { seedBakeries, seedOrders } from "../../data/seed-data.js";
 
 const DEFAULT_DB_PATH = path.join(process.cwd(), "work", "hlebushek.db");
 

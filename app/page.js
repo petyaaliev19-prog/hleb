@@ -1,9 +1,9 @@
 import { AppShell } from "@/components/app-shell";
-import { DashboardPanel } from "@/components/dashboard-panel";
 import { HeroSection } from "@/components/hero-section";
-import { OrdersFeed } from "@/components/orders-feed";
-import { StorefrontWorkspace } from "@/components/storefront-workspace";
-import { dbRepository } from "@/lib/db-repository";
+import { StorefrontWorkspace } from "@/features/bakeries/components/storefront-workspace";
+import { DashboardPanel } from "@/features/dashboard/components/dashboard-panel";
+import { OrdersFeed } from "@/features/orders/components/orders-feed";
+import { dbRepository } from "@/server/db/db-repository";
 
 export default async function HomePage() {
   const metrics = await dbRepository.getOverviewMetrics();
@@ -19,7 +19,11 @@ export default async function HomePage() {
     <AppShell activeNav="showcase">
       <HeroSection initialMetrics={metrics} />
       <StorefrontWorkspace initialBakeries={bakeries} />
-      <OrdersFeed initialDate={metrics.primaryDate} initialOrders={initialOrders} />
+      <OrdersFeed
+        initialDate={metrics.primaryDate}
+        initialAvailableDates={availableDates}
+        initialOrders={initialOrders}
+      />
       <DashboardPanel
         initialDate={metrics.primaryDate}
         initialBakeries={bakeries}

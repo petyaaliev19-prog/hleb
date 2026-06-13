@@ -4,7 +4,7 @@ import {
   canTransitionOrderStatus,
   getNextOrderStatuses,
   isKnownOrderStatus,
-} from "../lib/order-status.js";
+} from "../features/orders/order-status.js";
 
 test("order status helpers expose known statuses and next transitions", () => {
   assert.equal(isKnownOrderStatus("confirmed"), true);

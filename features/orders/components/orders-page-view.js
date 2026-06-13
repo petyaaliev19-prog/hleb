@@ -1,6 +1,6 @@
-import { OrdersFeed } from "@/components/orders-feed";
+import { OrdersFeed } from "@/features/orders/components/orders-feed";
 
-export function OrdersPageView({ initialDate, initialOrders }) {
+export function OrdersPageView({ initialDate, initialAvailableDates, initialOrders }) {
   return (
     <>
       <section className="hero">
@@ -12,7 +12,11 @@ export function OrdersPageView({ initialDate, initialOrders }) {
           </p>
         </div>
       </section>
-      <OrdersFeed initialDate={initialDate} initialOrders={initialOrders} />
+      <OrdersFeed
+        initialDate={initialDate}
+        initialAvailableDates={initialAvailableDates}
+        initialOrders={initialOrders}
+      />
     </>
   );
 }

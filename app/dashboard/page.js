@@ -1,6 +1,6 @@
 import { AppShell } from "@/components/app-shell";
-import { DashboardPageView } from "@/components/dashboard-page-view";
-import { dbRepository } from "@/lib/db-repository";
+import { DashboardPageView } from "@/features/dashboard/components/dashboard-page-view";
+import { dbRepository } from "@/server/db/db-repository";
 
 export default async function DashboardPage() {
   const metrics = await dbRepository.getOverviewMetrics();

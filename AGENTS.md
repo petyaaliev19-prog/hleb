@@ -48,6 +48,13 @@ Do not add without an explicit product decision:
 5. Commit completed logical steps.
 6. Push completed commits to `origin/main`.
 
+## Module Placement
+
+1. Put domain UI and domain helpers in `features/<domain>/`.
+2. Put server-only persistence code in `server/`.
+3. Keep `components/` for app-wide presentation components only.
+4. Keep `lib/` for cross-domain browser API and formatting helpers.
+
 ## Git
 
 Main branch: `main`

@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAvailableDates } from "@/data/mock-data";
 import { fetchOrders } from "@/lib/api";
 import { formatDate } from "@/lib/format";
-import { OrderCard } from "@/components/order-card";
+import { OrderCard } from "@/features/orders/components/order-card";
 
-export function OrdersFeed({ initialDate, initialOrders }) {
+export function OrdersFeed({ initialDate, initialAvailableDates, initialOrders }) {
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [orders, setOrders] = useState(initialOrders);
 
@@ -47,7 +46,7 @@ export function OrdersFeed({ initialDate, initialOrders }) {
         <label className="field compact-field">
           <span>Дата</span>
           <select value={selectedDate} onChange={(event) => handleDateChange(event.target.value)}>
-            {getAvailableDates().map((date) => (
+            {initialAvailableDates.map((date) => (
               <option key={date} value={date}>
                 {formatDate(date)}
               </option>

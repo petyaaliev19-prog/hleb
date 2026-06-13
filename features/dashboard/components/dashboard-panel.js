@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchOrders, updateOrderStatus } from "@/lib/api";
 import { formatDate, getStatusLabel } from "@/lib/format";
-import { getNextOrderStatuses } from "@/lib/order-status";
-import { buildDashboardSummary, groupOrdersBySlot } from "@/lib/order-utils";
+import { getNextOrderStatuses } from "@/features/orders/order-status";
+import { buildDashboardSummary, groupOrdersBySlot } from "@/features/orders/order-utils";
 
 export function DashboardPanel({
   initialDate,

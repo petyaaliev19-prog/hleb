@@ -9,7 +9,7 @@ import {
   getOrdersForBakeryByDate,
   getOverviewMetrics,
 } from "../data/mock-data.js";
-import { getBakeryDates } from "../lib/bakery-utils.js";
+import { getBakeryDates } from "../features/bakeries/bakery-utils.js";
 
 test("bakery selectors return expected bakery entities", () => {
   const bakery = getBakeryBySlug("muka");

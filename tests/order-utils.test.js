@@ -7,7 +7,7 @@ import {
   calculateCartTotals,
   groupOrdersBySlot,
   normalizeCartQty,
-} from "../lib/order-utils.js";
+} from "../features/orders/order-utils.js";
 
 test("normalizeCartQty clamps values into valid range", () => {
   assert.equal(normalizeCartQty(-4, 10), 0);
