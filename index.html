@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Хлебушек</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MVP сервиса предзаказа</p>
+          <h1>Хлебушек</h1>
+        </div>
+        <nav class="topnav" aria-label="Основная навигация">
+          <button class="nav-link is-active" data-screen-target="showcase">Витрина</button>
+          <button class="nav-link" data-screen-target="orders">Заказы</button>
+          <button class="nav-link" data-screen-target="dashboard">Панель пекарни</button>
+        </nav>
+      </header>
+
+      <main class="layout">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Свежий хлеб под самовывоз</p>
+            <h2>Покупатель бронирует хлеб заранее, а пекарня видит точный план на день.</h2>
+            <p class="hero-text">
+              В этой MVP-версии нет доставки и онлайн-оплаты. Есть только понятный каталог,
+              оформление предзаказа и операционная панель для пекарни.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-btn" id="hero-browse-btn">Посмотреть пекарни</button>
+              <button class="ghost-btn" data-screen-target="dashboard">Открыть панель пекарни</button>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <article class="metric-card">
+              <span>Пекарен в пилоте</span>
+              <strong id="metric-bakeries">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Заказов на завтра</span>
+              <strong id="metric-orders">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Позиций в бронях</span>
+              <strong id="metric-items">0</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <div class="catalog-panel" id="showcase-screen">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Каталог пекарен</p>
+                <h3>Где забрать хлеб</h3>
+              </div>
+              <label class="search-field">
+                <span class="sr-only">Поиск по пекарням</span>
+                <input type="search" id="bakery-search" placeholder="Название или район" />
+              </label>
+            </div>
+            <div class="bakery-grid" id="bakery-grid"></div>
+          </div>
+
+          <div class="storefront-panel">
+            <div class="panel-header" id="bakery-header"></div>
+
+            <div class="selectors">
+              <label class="field">
+                <span>Дата самовывоза</span>
+                <select id="pickup-date-select"></select>
+              </label>
+              <label class="field">
+                <span>Слот выдачи</span>
+                <select id="pickup-slot-select"></select>
+              </label>
+            </div>
+
+            <div class="product-grid" id="product-grid"></div>
+          </div>
+
+          <aside class="order-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Предзаказ</p>
+                <h3>Твоя корзина</h3>
+              </div>
+            </div>
+
+            <div class="order-summary" id="order-summary"></div>
+
+            <form class="checkout-form" id="checkout-form">
+              <label class="field">
+                <span>Имя</span>
+                <input type="text" id="customer-name" placeholder="Например, Анна" required />
+              </label>
+              <label class="field">
+                <span>Телефон</span>
+                <input type="tel" id="customer-phone" placeholder="+7 900 123-45-67" required />
+              </label>
+              <label class="field">
+                <span>Комментарий</span>
+                <textarea id="customer-comment" rows="3" placeholder="Например, нарезать хлеб"></textarea>
+              </label>
+              <button class="primary-btn" type="submit">Оформить предзаказ</button>
+            </form>
+
+            <div class="confirmation-card hidden" id="confirmation-card"></div>
+          </aside>
+        </section>
+
+        <section class="orders-screen hidden" id="orders-screen">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Лента заказов</p>
+              <h3>Что уже оформили покупатели</h3>
+            </div>
+            <label class="field compact-field">
+              <span>Дата</span>
+              <select id="orders-date-select"></select>
+            </label>
+          </div>
+          <div class="orders-list" id="orders-list"></div>
+        </section>
+
+        <section class="dashboard-screen hidden" id="dashboard-screen">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Панель пекарни</p>
+              <h3>Операционный срез на день</h3>
+            </div>
+            <label class="field compact-field">
+              <span>Пекарня</span>
+              <select id="dashboard-bakery-select"></select>
+            </label>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="dashboard-card">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">План производства</p>
+                  <h4>Сводка по позициям</h4>
+                </div>
+              </div>
+              <div class="summary-list" id="summary-list"></div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">Выдача</p>
+                  <h4>Заказы по слотам</h4>
+                </div>
+              </div>
+              <div class="pickup-timeline" id="pickup-timeline"></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+  </html>
